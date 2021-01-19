@@ -5,22 +5,27 @@ import os
 import csv
 
 csvpath = os.path.join ("Resources", "budget_data.csv")
-print (csvpath)
+# print (csvpath)
 
 #open CSV file for reading
 with open (csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader (csvfile, delimiter = ',')
-    print (csvreader)
+    # print (csvreader)
 
 # Read the header row first 
     csv_header = next(csvfile)
-    print(f"Header: {csv_header}")
+    # print(f"Header: {csv_header}")
 
-    for row in csvreader:
-        print (row)
+    # for row in csvreader:
+    #     print (row)
 
-#The total number of months included in the dataset
+    #The total number of months included in the dataset
+    total = len (list(csvreader))
+    # print (total)
+    print(f"Total Months: {total}")
+
+
 
 
 

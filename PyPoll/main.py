@@ -17,8 +17,10 @@ with open (csvpath) as csvfile:
     csv_header = next(csvfile)
     print(f"Header: {csv_header}")    
 
-    for row in csvreader:
-        print (row)
+    # for row in csvreader:
+    #     print (row)
+
+    
 
 #The total number of votes cast
 
