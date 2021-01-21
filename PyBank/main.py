@@ -9,7 +9,8 @@ csvpath = os.path.join ("Resources", "budget_data.csv")
 #creates a list to store data
 total_month = []
 #creates a variable with an integer
-total_profit_losses = 0
+net_profit_losses = 0
+total_profit_loses = []
 
 #open the csv file for reading
 with open (csvpath) as csvfile:
@@ -22,7 +23,13 @@ with open (csvpath) as csvfile:
         #The total number of months included in the dataset
         total_month.append(row[0])
         # The net total amount of "Profit/Losses" over the entire period
-        total_profit_losses += int(row[1])
+        net_profit_losses += int(row[1])
+        
+        total_profit_loses.append(row[1])
+        
+        
+    
     #print out the result
+    print (total_profit_loses[2])
     print (f'Total Months: {len(total_month)}')
-    print (f'Total: $ {total_profit_losses}')   
+    print (f'Total: $ {net_profit_losses}')   
