@@ -12,6 +12,12 @@ monthly_profit_losses = []
 
 #creates a variable with an integer
 net_profit_losses = 0
+monthly_changes = 0
+average_changes = 0
+greatest_increase = 0
+greatest_decrease = 0
+right_data = 0
+right_data2 = 0
 
 #open the csv file for reading
 with open (csvpath) as csvfile:
@@ -30,13 +36,27 @@ with open (csvpath) as csvfile:
         monthly_changes = [int(x) - int(monthly_profit_losses[i - 1]) for i, x in enumerate(monthly_profit_losses) if i > 0]
         sum_changes = sum(monthly_changes)
         
-        
- #print out the result
+    
     average_changes = round(sum_changes/len(monthly_changes), 2)
+    greatest_increase = max(monthly_changes)
+    greatest_decrease = min(monthly_changes)
+    
+    right_data = [ x for i, x in enumerate(monthly_profit_losses) if (int(x) - int(monthly_profit_losses[i - 1])) == int(greatest_increase)]
+    print (right_data)
+
+    right_data2 = [ x for i, x in enumerate(monthly_profit_losses) if (int(x) - int(monthly_profit_losses[i - 1])) == int(greatest_decrease)]
+    print (right_data2)
+
+    #print out the result
+    print ("Financial Analysis")
+    print ("----------------------------")
     print (f'Total Months: {len(months_total)}')
     print (f'Total: $ {net_profit_losses}')  
     print (f'Average  Change: $ {average_changes}')
-    # print (len(monthly_changes))
-    # print (sum_changes)
+    print (f'Greatest Increase in Profits: ({greatest_increase})')
+    print (f'Greatest Decrease in Profits: ({greatest_decrease})')
+    # print (months_total[monthly_changes.index(min(monthly_changes))])
+    # print (months_total[monthly_changes.index(max(monthly_changes))])
     
+
 
