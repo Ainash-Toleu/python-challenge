@@ -5,21 +5,24 @@ import os
 import csv
 
 csvpath = os.path.join ("Resources", "election_data.csv")
-print (csvpath)
+
+total_votes = []
 
 #open CSV file for reading
 with open (csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader (csvfile, delimiter = ',')
-    print (csvreader)
+    
+    # skip the header row 
+    next(csvfile)
+    for row in csvreader:
+        total_votes.append(row[0])
 
-# Read the header row first 
-    csv_header = next(csvfile)
-    print(f"Header: {csv_header}")    
-
-    # for row in csvreader:
-    #     print (row)
-
+    
+print ("Election Results")
+print ("-------------------------")
+print (f'Total Votes: {len(total_votes)}')
+print ("-------------------------")
     
 
 #The total number of votes cast
