@@ -24,31 +24,35 @@ with open (csvpath) as csvfile:
 
     for name in candidates_list: 
         if name not in unique_candidate_list and name != " ": 
-            unique_candidate_list.append(name) 
-    #for name in unique_candidate_list: 
-       #print (name)    
+            unique_candidate_list.append(name)   
 
     for x in unique_candidate_list:
         for y in candidates_list:
             if str(x) == str(y):
                 votes_for_candidate.append(y)
-        #print(votes_for_candidate) 
 
     dictionary = {}
     for votes in votes_for_candidate:
+        
         dictionary.setdefault(votes, 0)
         dictionary[votes] += 1
-    max_key =  max (dictionary, key = dictionary.get)   
-         
+    max_key =  max (dictionary, key = dictionary.get)  
 
-print ("Election Results")
-print ("-------------------------")
-print (f'Total Votes: {len(total_votes)}')
-print ("-------------------------")    
-for votes, count in dictionary.items():
-    print("{} : {}".format (votes, count)) 
-# print (dictionary) 
-print ("-------------------------")
-print (f"Winner: {max_key}")
-print ("-------------------------")
+output_path = os.path.join ("Analysis", "analysis.txt")
+
+with open (output_path, 'w', newline='') as textfile:
+    print ("Election Results", file = textfile)
+    print ("-------------------------", file = textfile)
+    print (f'Total Votes: {len(total_votes)}', file = textfile)
+    print ("-------------------------", file = textfile)  
+
+    for votes, count in dictionary.items():
+        percentage = float(int(count)/len(total_votes))
+        percent = "{:.3%}". format(percentage)
+        print("{} : {} ({})".format (votes, percent, count), file = textfile) 
+
+    print ("-------------------------", file = textfile)
+    print (f"Winner: {max_key}", file = textfile)
+    print ("-------------------------", file = textfile)
+
 
