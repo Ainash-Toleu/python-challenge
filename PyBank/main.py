@@ -36,7 +36,7 @@ with open (csvpath) as csvfile:
         net_profit_losses += int(row[1])
         #add all the data in row 2 to a list
         monthly_profit_losses.append(row[1])
-        # calculates changes by each month. Found the hit to the answer in StackOverflow
+        # calculates changes by each month. Found the hint to the answer in StackOverflow
         monthly_changes = [int(x) - int(monthly_profit_losses[i - 1]) for i, x in enumerate(monthly_profit_losses) if i > 0]
         # calculates the sum of changes by each month
         sum_changes = sum(monthly_changes)
@@ -64,6 +64,14 @@ with open (csvpath) as csvfile:
             greatest_increase_month = row[0]
         if row[1] == right_data2[0]:
             greatest_decrease_month = row[0]
+
+print ("Financial Analysis")
+print ("----------------------------")
+print (f'Total Months: {len(months_total)}')
+print (f'Total: $ {net_profit_losses}')  
+print (f'Average  Change: $ {average_changes}')
+print (f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})')
+print (f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})')
 
 # sets the variable for output file
 output_path = os.path.join ("Analysis", "analysis.txt")

@@ -37,9 +37,24 @@ with open (csvpath) as csvfile:
     #calculates the winner 
     max_key =  max (dictionary, key = dictionary.get)  
 
+
+
+print ("Election Results")
+print ("-------------------------")
+print (f'Total Votes: {len(total_votes)}')
+print ("-------------------------")  
+# adds a percentage in dictionary and writes to a textfile
+for votes, count in dictionary.items():
+    percentage = float(int(count)/len(total_votes))
+    percent = "{:.3%}". format(percentage)
+    print("{} : {} ({})".format (votes, percent, count)) 
+    # writes the winner to a textfile
+print ("-------------------------")
+print (f"Winner: {max_key}")
+print ("-------------------------")
+
 # sets the variable for output file
 output_path = os.path.join ("Analysis", "analysis.txt")
-
 # opens the output file
 with open (output_path, 'w', newline='') as textfile:
     # writes the answer to a textflie. Thanks to Stephanie that found this method in StackOverflow
