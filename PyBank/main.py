@@ -10,7 +10,7 @@ csvpath = os.path.join ("Resources", "budget_data.csv")
 months_total = []
 monthly_profit_losses = []
 
-#creates a variable with an integer
+#creates a variables
 net_profit_losses = 0
 monthly_changes = 0
 average_changes = 0
@@ -18,6 +18,8 @@ greatest_increase = 0
 greatest_decrease = 0
 right_data = 0
 right_data2 = 0
+greatest_increase_month = ""
+greatest_decrease_month = ""
 
 #opens the csv file for reading
 with open (csvpath) as csvfile:
@@ -38,8 +40,6 @@ with open (csvpath) as csvfile:
         monthly_changes = [int(x) - int(monthly_profit_losses[i - 1]) for i, x in enumerate(monthly_profit_losses) if i > 0]
         # calculates the sum of changes by each month
         sum_changes = sum(monthly_changes)
-        
-    
 
     # calculates average of changes 
     average_changes = round(sum_changes/len(monthly_changes), 2)
@@ -49,15 +49,21 @@ with open (csvpath) as csvfile:
     greatest_decrease = min(monthly_changes)
     
     right_data = [ x for i, x in enumerate(monthly_profit_losses) if (int(x) - int(monthly_profit_losses[i - 1])) == int(greatest_increase)]
-    # print (right_data)
-    # print(type(right_data))
 
     right_data2 = [ x for i, x in enumerate(monthly_profit_losses) if (int(x) - int(monthly_profit_losses[i - 1])) == int(greatest_decrease)]
-    # print (right_data2)
 
+# many thanks to my teacher Dominic and TA Mohamed for helping me solve this part of my homework.
+with open (csvpath) as csvfile:
+    #csv reader specifies delimiter and variable that holds contents
+    csvreader = csv.reader(csvfile, delimiter =',')
+    #skip the header
+    next(csvfile)
+    #loops through csvreader
     for row in csvreader:
-        if row[1] == str(right_data):
-            print (row[0])
+        if row[1] == right_data[0]:
+            greatest_increase_month = row[0]
+        if row[1] == right_data2[0]:
+            greatest_decrease_month = row[0]
 
 # sets the variable for output file
 output_path = os.path.join ("Analysis", "analysis.txt")
@@ -70,8 +76,9 @@ with open (output_path, 'w', newline='') as textfile:
     print (f'Total Months: {len(months_total)}', file = textfile)
     print (f'Total: $ {net_profit_losses}', file = textfile)  
     print (f'Average  Change: $ {average_changes}', file = textfile)
-    print (f'Greatest Increase in Profits: ({greatest_increase})', file = textfile)
-    print (f'Greatest Decrease in Profits: ({greatest_decrease})', file = textfile)
+    print (f'Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})', file = textfile)
+    print (f'Greatest Decrease in Profits: {greatest_decrease_month} (${greatest_decrease})', file = textfile)
+
 
 
    
